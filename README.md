@@ -6,10 +6,10 @@ CineRoll es una aplicación web interactiva que permite descubrir **películas a
 
 ## 🔹 Capturas de pantalla
 
-![Pantalla principal](img/screenshot1.png)  
+![Pantalla principal](public/img/screenshot1.png)  
 *Pantalla de selección de géneros y plataformas*
 
-![Resultados de película](img/screenshot2.png)  
+![Resultados de película](public/img/screenshot2.png)  
 *Tarjeta de película con sinopsis, duración, nota y botón de trailer*
 
 ---
