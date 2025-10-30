@@ -1,0 +1,361 @@
+/* --------------------- Layout general --------------------- */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #0d0d0d;
+  color: #fff;
+  text-align: center;
+}
+
+main {
+  flex: 1;
+  padding: 10px;
+}
+
+/* --------------------- Base --------------------- */
+.logo {
+  width: clamp(24px, 6vw, 40px);
+  height: clamp(24px, 6vw, 40px);
+  margin-bottom: -4px;
+}
+
+h1 {
+  color: #ff4500;
+  margin-bottom: 10px;
+  font-size: clamp(1.8rem, 4vw + 0.5rem, 3rem);
+  font-weight: 700;
+  line-height: 1.2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+h1 a {
+  text-decoration: none;
+  color: inherit;
+}
+
+p { color: #ccc; }
+
+/* --------------------- Botones --------------------- */
+button, .btn-primary {
+  padding: 10px 15px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: none;
+  margin: 40px 5px;
+  cursor: pointer;
+  transition: 0.3s;
+  background-color: #ff4500;
+  color: white;
+}
+button:hover, .btn-primary:hover { background-color: #ff6533; }
+
+/* --------------------- Loader --------------------- */
+#loading {
+  display: none;
+  margin: 20px 0 40px 0;
+  color: #ff4500;
+  text-align: center;
+}
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #444;
+  border-top: 4px solid #ff4500;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 15px auto;
+}
+@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+#loadingText { color: #ff4500; font-size: 1.1em; transition: opacity 0.5s; }
+
+/* --------------------- Filtros de plataformas --------------------- */
+.platforms {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin: 20px 0;
+}
+.platform {
+   width: 70px;
+  height: 70px;
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: #ccc;
+  border: 2px solid transparent;
+  transition: 0.3s;
+  cursor: pointer;
+}
+.platform:hover {
+  box-shadow: 0 0 10px #ff4500;
+  transform: scale(1.1);
+}
+.platform.selected {
+  border: 2px solid #ff4500;
+  box-shadow: 0 0 10px #ff4500;
+  transform: scale(1.05);
+}
+.platform img { width: 100%; height: 100%; object-fit: cover; }
+
+/* --------------------- Botones de géneros --------------------- */
+.genres {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 40px;
+  width: 40%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.genre {
+  background-color: #222;
+  border: 1px solid #333;
+  color: #ccc;
+  border-radius: 20px;
+  padding: 8px 15px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.genre:hover { background-color: #333; }
+.genre.selected {
+  background-color: #ff4500;
+  color: #fff;
+  border-color: #ff4500;
+  box-shadow: 0 0 10px #ff4500;
+}
+
+/* --------------------- Contenedor de película --------------------- */
+#movie {
+  margin: 40px 0;
+  display: flex;
+  justify-content: center;
+}
+.movie-container {
+  display: flex;
+  gap: 25px;
+  max-width: 1100px;
+  align-items: flex-start;
+  background-color: #111;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+}
+.movie-container img {
+  width: 450px;
+  background-color: #ccc;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+}
+.movie-info {
+  text-align: left;
+  flex: 1;
+}
+.movie-info h2 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  color: #ff4500;
+}
+.movie-info p { color: #ccc; margin-bottom: 5px; }
+
+/* --------------------- Botón Trailer --------------------- */
+.trailer-button {
+  display: inline-block;
+  margin: 20px 0;
+  padding: 4px 8px;
+  background-color: #ff4500;
+  color: #fff;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.trailer-button:hover {
+  background-color: #ff6533;
+  box-shadow: 0 0 10px #ff4500;
+}
+
+/* --------------------- Géneros y plataformas dentro de la película --------------------- */
+.movie-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+.genre-chip {
+  background: #222;
+  border-radius: 10px;
+  padding: 5px 10px;
+  color: #fff;
+  font-size: 14px;
+}
+
+.movie-platforms {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 15px;
+}
+.movie-platforms img {
+  width: clamp(30px, 6vw, 40px);
+  height: auto;
+  object-fit: contain;
+  border-radius: 6px;
+  transition: transform 0.3s, box-shadow 0.3s, border 0.3s;
+  cursor: pointer;
+  border: 2px solid transparent;
+}
+.movie-platforms a img:hover { transform: scale(1.2); }
+
+/* Hover colores por marca */
+.platform-link.netflix img:hover { box-shadow: 0 4px 10px rgba(229, 9, 20, 0.7); border-color: rgba(229, 9, 20, 0.8); }
+.platform-link.amazon-prime-video img:hover { box-shadow: 0 4px 10px rgba(0, 102, 204, 0.7); border-color: rgba(0, 102, 204, 0.8); }
+.platform-link.disney-plus img:hover { box-shadow: 0 4px 10px rgba(0, 102, 204, 0.7); border-color: rgba(0, 102, 204, 0.8); }
+.platform-link.hbo-max img:hover { box-shadow: 0 4px 10px rgba(123, 0, 255, 0.7); border-color: rgba(123, 0, 255, 0.8); }
+.platform-link.apple-tv img:hover { box-shadow: 0 4px 10px rgba(0, 0, 0, 0.7); border-color: rgba(0, 0, 0, 0.8); }
+
+/* --------------------- Footer --------------------- */
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 1rem;
+  margin-top: 5rem;
+  color: #ccc;
+}
+
+footer a {
+  color: #ff4500;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+footer a:hover {
+  color: #ff6533;
+}
+
+/* --------------------- Media Queries Responsive --------------------- */
+
+/* Tablets */
+@media (max-width: 1024px) {
+  .movie-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .movie-container img {
+    max-width: 80%;
+    height: auto;
+  }
+
+  .movie-info {
+    text-align: center;
+  }
+
+  .genres {
+    width: 60%;
+  }
+}
+
+/* Móviles */
+@media (max-width: 768px) {
+  h1 { font-size: 1.8em; }
+  p { font-size: 0.9em; }
+
+  .movie-container img { max-width: 90%; }
+
+  .trailer-button, button, .btn-primary { font-size: 14px; padding: 8px 12px; }
+
+  .genres { width: 80%; }
+  .platforms { justify-content: center; }
+  .movie-platforms { justify-content: center; }
+}
+
+/* Pequeños móviles */
+@media (max-width: 480px) {
+  h1 { font-size: 1.5em; }
+  p { font-size: 0.85em; }
+  footer { flex-direction: column; gap: 5px; }
+  .logo { width: 24px; height: 24px; }
+}
+
+/* --------------------- Contenedor de película (ajustes adicionales) --------------------- */
+@media (max-width: 768px) {
+  .movie-container {
+    flex-direction: column;
+    align-items: center;
+    max-width: 95%;
+    padding: 20px;
+  }
+
+  .movie-container img {
+    width: 100%;
+    max-width: 400px;
+  }
+
+  .movie-info {
+    text-align: center;
+  }
+}
+
+/* --------------------- Plataformas dentro de la película (ajustes adicionales) --------------------- */
+@media (max-width: 768px) {
+  .movie-platforms {
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .movie-platforms img {
+    width: clamp(25px, 8vw, 45px);
+  }
+}
+
+
+/* --------------------- Info compacta (duración, nota y trailer) --------------------- */
+.movie-extra {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 8px;
+  margin-bottom: 10px;
+}
+
+.movie-extra p {
+  margin: 0;
+  color: #ccc;
+  font-size: 0.95em;
+}
+
+.movie-extra .trailer-button {
+  margin: 0;
+  padding: 4px 10px;
+  font-size: 0.9em;
+}
+
+/* Responsive ajustes */
+@media (max-width: 768px) {
+  .movie-extra {
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    gap: 8px;
+  }
+
+  .movie-extra .trailer-button {
+    width: 100%;
+    text-align: center;
+  }
+}
+

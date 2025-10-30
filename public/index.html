@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/svg+xml" href="img/cineroll-logo.svg">
+  <title>CineRoll</title>
+  <meta name="description" content="Elige tus plataformas y géneros, y deja que el azar decida tu próxima película.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>
+      <a href="#" aria-label="Ir a la página principal">
+        <img src="/img/cineroll-logo.svg" alt="CineRoll Logo" class="logo">
+        CineRoll
+      </a>
+    </h1>
+    <p>Elige tus plataformas y géneros, y deja que el azar decida tu próxima película</p>
+  </header>
+
+  <main>
+    <div id="movie"></div>
+
+    <div id="loading" class="loading">
+      <div class="spinner"></div>
+      <p id="loadingText">🎬 Buscando una joya para ti...</p>
+    </div>
+
+    <h3>Géneros</h3>
+    <div id="genresContainer" class="genres"></div>
+
+    <h3>Plataformas</h3>
+    <div class="platforms" id="providersSelect">
+      <div class="platform" data-name="Netflix">
+        <img src="img/netflix-logo.svg" alt="Netflix">
+      </div>
+      <div class="platform" data-name="Amazon Prime Video">
+        <img src="img/prime-video-logo.svg" alt="Amazon Prime">
+      </div>
+      <div class="platform" data-name="Disney Plus">
+        <img src="img/disney-plus-logo.svg" alt="Disney+">
+      </div>
+      <div class="platform" data-name="HBO Max">
+        <img src="img/hbo-max-logo.svg" alt="HBO">
+      </div>
+      <div class="platform" data-name="Apple TV+">
+        <img src="img/apple-tv-logo.svg" alt="Apple TV+">
+      </div>
+    </div>
+
+    <button id="randomBtn">🎬 Dame una película</button>
+  </main>
+  
+  <footer>
+    <small>
+      © 2025 <span class="font-semibold text-gray-700">Alextsdev</span> · Datos de <a href="https://www.themoviedb.org/" target="_blank">TMDb</a>
+    </small>
+  </footer>
+
+  <script src="app.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+</body>
+</html>
