@@ -27,15 +27,14 @@ app.get('/genres', async (req, res) => {
 app.get('/movies/random', async (req, res) => {
   const { genre, providers } = req.query;
   const selectedProviders = providers ? providers.split(',').map(p => p.toLowerCase()) : [];
-  const selectedGenres = genre ? genre.split(',').join(',') : '';
+  const selectedGenres = genre ? genre.split(',').map(g => parseInt(g)) : [];
   const allowedPlatforms = ['netflix', 'amazon prime video', 'disney plus', 'hbo max', 'apple tv+'];
 
   try {
     console.log("🎬 Buscando película que cumpla los filtros...");
 
-    // 🔹 Obtener total de páginas disponibles
     const firstCall = await axios.get('https://api.themoviedb.org/3/discover/movie', {
-      params: { api_key: process.env.TMDB_API_KEY, language: 'es-ES', with_genres: selectedGenres },
+      params: { api_key: process.env.TMDB_API_KEY, language: 'es-ES' },
     });
 
     let totalPages = Math.min(firstCall.data.total_pages || 1, 500);
@@ -51,7 +50,6 @@ app.get('/movies/random', async (req, res) => {
           api_key: process.env.TMDB_API_KEY,
           language: 'es-ES',
           sort_by: 'popularity.desc',
-          with_genres: selectedGenres,
           page: randomPage,
         },
       });
@@ -61,7 +59,10 @@ app.get('/movies/random', async (req, res) => {
 
       const randomMovie = movies[Math.floor(Math.random() * movies.length)];
 
-      // 🔹 Consultar plataformas disponibles
+      const matchesGenre = selectedGenres.length === 0 ||
+        randomMovie.genre_ids.some(id => selectedGenres.includes(id));
+      if (!matchesGenre) continue;
+
       const provRes = await axios.get(
         `https://api.themoviedb.org/3/movie/${randomMovie.id}/watch/providers`,
         { params: { api_key: process.env.TMDB_API_KEY } }
@@ -73,20 +74,17 @@ app.get('/movies/random', async (req, res) => {
       );
       if (!providersList.length) continue;
 
-      // 🎯 Verificar coincidencia con selección del usuario
       const movieProviders = providersList.map(p => p.provider_name.toLowerCase());
-      const match =
+      const matchesProvider =
         selectedProviders.length === 0 ||
         selectedProviders.some(sp => movieProviders.some(mp => mp.includes(sp)));
 
-      if (match) {
-        // 🔹 Obtener detalles completos de la película (duración, nota, trailers)
+      if (matchesProvider) {
         const detailsRes = await axios.get(`https://api.themoviedb.org/3/movie/${randomMovie.id}`, {
           params: { api_key: process.env.TMDB_API_KEY, language: 'es-ES' },
         });
         const details = detailsRes.data;
 
-        // 🔹 Obtener trailers
         const videosRes = await axios.get(`https://api.themoviedb.org/3/movie/${randomMovie.id}/videos`, {
           params: { api_key: process.env.TMDB_API_KEY, language: 'es-ES' },
         });

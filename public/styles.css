@@ -6,7 +6,15 @@ html, body {
   display: flex;
   flex-direction: column;
   font-family: 'Segoe UI', sans-serif;
-  background-color: #0d0d0d;
+  background: linear-gradient(
+    180deg,
+    #0d0d0d 0%,
+    #0a0a0f 40%,
+    #1a0f2c 100%
+  );
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
   color: #fff;
   text-align: center;
 }
@@ -148,6 +156,7 @@ button:hover, .btn-primary:hover { background-color: #ff6533; }
   padding: 20px;
   border-radius: 12px;
   box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+  position: relative;
 }
 .movie-container img {
   width: 450px;
@@ -182,6 +191,28 @@ button:hover, .btn-primary:hover { background-color: #ff6533; }
 .trailer-button:hover {
   background-color: #ff6533;
   box-shadow: 0 0 10px #ff4500;
+}
+
+/* --------------------- Botón Reroll --------------------- */
+.reroll-btn {
+  position: absolute;
+  bottom: -20px;
+  right: 10px; 
+  background-color: #ff4500;
+  color: white;
+  border: none;
+  padding: 6px 8px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+}
+
+.reroll-btn:hover {
+  background-color: #ff6533;
+  transform: scale(1.05);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
 }
 
 /* --------------------- Géneros y plataformas dentro de la película --------------------- */
@@ -290,7 +321,7 @@ footer a:hover {
   .logo { width: 24px; height: 24px; }
 }
 
-/* --------------------- Contenedor de película (ajustes adicionales) --------------------- */
+/* --------------------- Contenedor de película --------------------- */
 @media (max-width: 768px) {
   .movie-container {
     flex-direction: column;
@@ -309,7 +340,7 @@ footer a:hover {
   }
 }
 
-/* --------------------- Plataformas dentro de la película (ajustes adicionales) --------------------- */
+/* --------------------- Plataformas dentro de la película --------------------- */
 @media (max-width: 768px) {
   .movie-platforms {
     justify-content: center;
@@ -322,7 +353,7 @@ footer a:hover {
 }
 
 
-/* --------------------- Info compacta (duración, nota y trailer) --------------------- */
+/* --------------------- Info compacta --------------------- */
 .movie-extra {
   display: flex;
   align-items: center;
@@ -358,4 +389,3 @@ footer a:hover {
     text-align: center;
   }
 }
-

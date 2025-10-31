@@ -92,7 +92,6 @@ function getProviderUrl(name) {
 
 // --------------------- Obtener película ---------------------
 async function obtenerPelicula() {
-  // 🔒 Bloqueamos el botón y cambiamos estilo y texto
   button.disabled = true;
   const originalText = button.textContent;
   button.textContent = "Cargando...";
@@ -137,7 +136,6 @@ async function obtenerPelicula() {
                 </a>`;
       }).join('') || '';
 
-    // Trailer (si existe)
     const trailerHTML = movie.trailers?.length
       ? `<a href="https://www.youtube.com/watch?v=${movie.trailers[0].key}" target="_blank" class="trailer-button">🎬 Ver trailer</a>`
       : '';
@@ -155,9 +153,17 @@ async function obtenerPelicula() {
 
           <div class="movie-meta">${genreHTML}</div>
           <div class="movie-platforms" style="margin-top:10px;">${providersHTML}</div>
+          <button class="reroll-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 12 12"><path fill="none" stroke="#ffffff" stroke-linecap="round" d="M10 4c-.8-1.1-2-2.5-4.1-2.5c-2.5 0-4.4 2-4.4 4.5s2 4.5 4.4 4.5c1.3 0 2.5-.6 3.3-1.5m1.3-7.5V4c0 .3-.2.5-.5.5H7.5"/></svg>
+          </button>
         </div>
       </div>
     `;
+
+    const rerollBtn = document.querySelector(".reroll-btn");
+    rerollBtn.addEventListener("click", () => {
+    obtenerPelicula();
+    });
 
     throwConfetti();
 
@@ -169,7 +175,7 @@ async function obtenerPelicula() {
   } finally {
     clearInterval(loadingInterval);
     loading.style.display = "none";
-    // 🔓 Desbloqueamos el botón y restauramos el texto
+
     button.disabled = false;
     button.textContent = originalText;
   }
